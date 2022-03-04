@@ -28,4 +28,4 @@ archive: tp-$(TP).zip
 tp-$(TP).zip: $(ARCHIVE_FILES)
 	zip $@ $(ARCHIVE_FILES)
 
-.PHONY: clean archive all
+.PHONY: all archive clean cleanall doc library

@@ -1,0 +1,9 @@
+*.o
+*.gch
+*.zip
+cbssm
+encode
+decode
+view_linear_coding
+tests/test_[a-z_]*
+doc/
