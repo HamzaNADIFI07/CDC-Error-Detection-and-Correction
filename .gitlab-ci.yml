@@ -1,4 +1,4 @@
-
+image: commonci-fil
 stages:
   - author
   - build
@@ -13,7 +13,6 @@ check_authors:
 
     
 build:
-  image: commonci-fil
   stage: build
   script:
     - make
