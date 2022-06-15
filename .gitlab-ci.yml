@@ -1,4 +1,4 @@
-image: commonci-fil
+image: commonci-fil:latest
 stages:
   - author
   - build
