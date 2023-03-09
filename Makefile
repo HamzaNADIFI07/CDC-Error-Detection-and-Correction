@@ -14,7 +14,7 @@ all: library $(MAIN)
 $(MAIN): % : %.o $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 %.o: %.c %.h
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@
 library: 
 	$(MAKE) -C lib
 clean:

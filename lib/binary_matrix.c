@@ -78,10 +78,18 @@ binary_matrix multiply_matrices(binary_matrix m1, binary_matrix m2) {
 }
 
 int matrix_value(binary_matrix matrix, int i, int j) {
+  if (i < 0 || i >= matrix->rows || j < 0 || j >= matrix->columns) {
+    fprintf(stderr, "matrix_value: the row or column index is invalid\n");
+    exit(2);
+  }
   return get_bit(matrix->matrix[i], j);
 }
 
 void set_matrix_value(binary_matrix matrix, int i, int j, int value) {
+  if (i < 0 || i >= matrix->rows || j < 0 || j >= matrix->columns) {
+    fprintf(stderr, "set_matrix_value: the row or column index is invalid\n");
+    exit(2);
+  }
   if (value == 0) {
     unset_bit(matrix->matrix[i], j);
   } else if (value == 1) {
