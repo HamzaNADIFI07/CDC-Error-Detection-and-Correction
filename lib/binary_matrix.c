@@ -3,6 +3,24 @@
 
 #include "binary_matrix.h"
 
+void __matrix_check_correct_index(binary_matrix matrix, int i, int j) {
+  if (i < 0) {
+    fprintf(stderr, "The row index cannot be negative (was %d).\n", i);
+    exit(2);
+  }
+  if (i >= matrix->rows) {
+    fprintf(stderr, "The row index was too large (was %d but we have %d rows).\n", i, matrix->rows);
+    exit(2);
+  }
+  if (j < 0) {
+    fprintf(stderr, "The column index cannot be negative (was %d).\n", j);
+    exit(2);
+  }
+  if (j >= matrix->columns) {
+    fprintf(stderr, "The column index was too large (was %d but we have %d columns).\n", j, matrix->columns);
+    exit(2);
+  }
+}
 
 binary_matrix zero_matrix(int rows, int columns) {
   binary_matrix matrix = malloc(sizeof(struct binary_matrix_s));
@@ -78,18 +96,12 @@ binary_matrix multiply_matrices(binary_matrix m1, binary_matrix m2) {
 }
 
 int matrix_value(binary_matrix matrix, int i, int j) {
-  if (i < 0 || i >= matrix->rows || j < 0 || j >= matrix->columns) {
-    fprintf(stderr, "matrix_value: the row or column index is invalid\n");
-    exit(2);
-  }
+  __matrix_check_correct_index(matrix, i, j);
   return get_bit(matrix->matrix[i], j);
 }
 
 void set_matrix_value(binary_matrix matrix, int i, int j, int value) {
-  if (i < 0 || i >= matrix->rows || j < 0 || j >= matrix->columns) {
-    fprintf(stderr, "set_matrix_value: the row or column index is invalid\n");
-    exit(2);
-  }
+  __matrix_check_correct_index(matrix, i, j);
   if (value == 0) {
     unset_bit(matrix->matrix[i], j);
   } else if (value == 1) {
