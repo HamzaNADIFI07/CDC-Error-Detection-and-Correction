@@ -5,19 +5,19 @@
 
 void __matrix_check_correct_index(binary_matrix matrix, int i, int j) {
   if (i < 0) {
-    fprintf(stderr, "The row index cannot be negative (was %d).\n", i);
+    fprintf(stderr, "The row index cannot be negative (it was %d).\n", i);
     exit(2);
   }
   if (i >= matrix->rows) {
-    fprintf(stderr, "The row index was too large (was %d but we have %d rows).\n", i, matrix->rows);
+    fprintf(stderr, "The row index was too large (it was %d but we have %d rows).\n", i, matrix->rows);
     exit(2);
   }
   if (j < 0) {
-    fprintf(stderr, "The column index cannot be negative (was %d).\n", j);
+    fprintf(stderr, "The column index cannot be negative (it was %d).\n", j);
     exit(2);
   }
   if (j >= matrix->columns) {
-    fprintf(stderr, "The column index was too large (was %d but we have %d columns).\n", j, matrix->columns);
+    fprintf(stderr, "The column index was too large (it was %d but we have %d columns).\n", j, matrix->columns);
     exit(2);
   }
 }
@@ -28,7 +28,16 @@ binary_matrix zero_matrix(int rows, int columns) {
 
   matrix->rows = rows;
   matrix->columns = columns;
+
+  if (rows < 0 || columns < 0) {
+    fprintf(stderr, "The number of rows and columns cannot be negative (it was %d and %d)\n", rows, columns);
+    exit(2);
+  }
   matrix->matrix = malloc(rows * sizeof(bitarray256_t *));
+  if (! matrix->matrix) {
+    fprintf(stderr, "zero_matrix: the matrix of %d rows and %d columns was not properly allocated\n", rows, columns);
+    exit(2);
+  }
 
   for (i = 0; i < rows; i++) {
     matrix->matrix[i] = init_bitarray();
@@ -58,6 +67,11 @@ void set_matrix_row(binary_matrix matrix, int row, ...) {
   int i;
 
   va_start(params, row);
+
+  if (row < 0 || row >= nb_rows(matrix)) {
+    fprintf(stderr, "set_matrix_row: the row is invalid (%d there are only %d rows)\n", row, nb_rows(matrix));
+    exit(2);
+  }
 
   for (i = 0; i < matrix->columns; i++) {
     int val = va_arg(params, int);
