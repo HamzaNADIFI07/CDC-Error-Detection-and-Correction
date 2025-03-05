@@ -13,8 +13,10 @@ void encode_repeat() {
 }
 
 unsigned char decode_three_bytes(unsigned char bytes[3]) {
-  /* A COMPLETER ET MODIFIER */
-  return 0;
+  
+  // M(A,B,C)=(A&B)∣(A&C)∣(B&C)
+  return ( bytes[0] & bytes[1] ) | ( bytes[0] & bytes[2] ) | ( bytes[1] & bytes[2] );
+
 }
 
 void decode_repeat() {

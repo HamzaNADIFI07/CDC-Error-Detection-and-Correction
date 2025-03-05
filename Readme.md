@@ -114,3 +114,76 @@ On peut constater avec des petites valeurs de probabilités d'erreur `(inférieu
 Alors que à partir de `0.0005`, l'archive se décompresse avec succès mais avec beaucoup d'erreurs.
 
 Après plusieurs essaie, je m'arrete à `0.05`, où l'archive ne se décompresse plus meme après plusieurs essaie avec la meme la valeur de probabilité d'erreurs.
+
+#### Q1.5:
+
+Après avoir passer l'image fournie `lille.gif`  dans le **CBSSM** avec la commande suivante:(en variant **XX** avec plusieurs valeur de probabilité d'erreur)
+
+```
+cat lille.gif | ./cbssm XX > lille-XX.gif
+```
+
+On peut constater que l'image est très sensible  aux erreurs parce que l'image est devenu inreconnaissable à partir de la valeur de probabilité `XX = 0.00005`.
+
+#### Q1.6:
+
+Après avoir experimenter les trois differents types de fichier `text.txt`,`archive.zip`,`image.gif` sur le **cbssm** et avec differents valeur de probabilité d'erreurs, on constate que parmi ces fichiers les  **images** sont les moins tolérants aux erreurs par rapport aux fichiers **archive** et aux fichiers **text**.
+
+## Partie 2 – codage par répétition 3 fois
+
+#### Q2.1:
+
+Pour déterminer le bit majoritaire à partir de 3 bits, on va utiliser le tableau de verité et le tableau de karnaugh.
+
+On va nommé chacun de ces bits par une lettre `A , B , C`.
+
+**Tableau de vérité:**
+
+En se basant sur cette image de modélisation du bit majoritaire:
+
+![Codage par répétition](./data/codeRep.svg)
+
+
+| **A** | **B** | **C** | **M(A, B, C)** |
+|:-----:|:-----:|:-----:|----------------|
+| 0     | 0     | 0     | 0              |
+| 0     | 0     | 1     | 0              |
+| 0     | 1     | 0     | 0              |
+| 0     | 1     | 1     | 1              |
+| 1     | 0     | 0     | 0              |
+| 1     | 0     | 1     | 1              |
+| 1     | 1     | 0     | 1              |
+| 1     | 1     | 1     | 1              |
+
+**Tableau de Karnaugh**
+
+| **A/BC** | 00 | 01 | 11 | 10 |
+|----------|----|----|----|----|
+| 0        | 0  | 0  | 1  | 0  |
+| 1        | 0  | 1  | 1  | 1  |
+
+Après avoir établie de tableau de Karnaugh, la relation simplifié est comme suit:
+
+**Relation mathématique**
+
+```math
+M(A,B,C)=(A∧B)∨(A∧C)∨(B∧C)
+```
+
+**Relation avec des opérateurs logiques `(ET (&), OU (|), XOR (^))`**
+
+```
+M(A,B,C)=(A&B)∣(A&C)∣(B&C)
+```
+
+#### Q2.3:
+Après avoir compiler le test `test_repeat` avec la commande suivante `make test_repeat` et executer avec la commande `./test_repeat`.
+
+Le test est passé avec succès:
+
+```bash
+ALL TESTS PASSED
+Tests run: 1 (including 9 assertions)
+```
+
+
