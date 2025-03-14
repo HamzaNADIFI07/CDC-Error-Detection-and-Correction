@@ -186,4 +186,89 @@ ALL TESTS PASSED
 Tests run: 1 (including 9 assertions)
 ```
 
+#### Q2.4:
+Après avoir compiler le programme avec la commande `make`.
 
+Et en lançant la commande suivante:
+
+```bash
+echo "Bonjour tout le monde" | ./encode repeat3
+```
+
+J'ai eu comme résultat:
+
+```bash
+BBBooonnnjjjooouuurrr   tttooouuuttt   llleee   mmmooonnndddeee
+```
+Donc on voit bien sur la sortie que chaque octet est bien triplé.
+
+#### Q2.5:
+
+Après avoir tester le décodage avec la commande suivante:
+
+```bash
+echo "Bonjour tout le monde" | ./encode repeat3 | ./decode repeat3
+```
+
+J'ai eu comme résultat:
+
+```bash
+Bonjour tout le monde
+```
+Donc on voit bien sur la sortie que le décodage a bien fonctionné.
+
+#### Q2.6:
+Après avoir creer encoder et décoder le fichier `TP-Erreurs.zip` dans le fichier `archive.zip`, en éxecuter la commande suivante:
+
+```bash
+cat TP-Erreurs.zip | ./encode repeat3 | ./decode repeat3 > archive.zip
+```
+Et en comparant le premier fichier `TP-Erreurs.zip` avec le deuxième fichier `archive.zip`, avec la commande suivante: 
+
+```bash
+cmp -l TP-Erreurs.zip archive.zip 
+```
+On peut constater que y a aucune difference entre les deux fichiers ce qui prouve l'efficacité de la fonction `encode` et `decode`.
+
+#### Q2.7:
+
+La commande **cbssm** est ajoutée après l'encodage et avant le décodage comme ceci:
+```bash
+cat TP-Erreurs.zip | ./encode repeat3 | ./cbssm p | ./decode repeat3 > archive.zip #Avec p: la probabilité d'erreurs à faire varier entre 0 et 1.
+```
+
+#### Q2.8:
+
+**Archive:**
+
+Après avoir éxecuter la commande suivante en variant de manière décroissante à partir de **1** `p` la probabilité d'erreur:
+
+```bash
+cat TP-Erreurs.zip | ./encode repeat3 | ./cbssm p | ./decode repeat3 > archive.zip
+```
+
+Et en décompressant à chaque valeur de probabilité l'archive créer, avec la commande suivante:
+
+```bash
+unzip -d repertoire1 archive.zip  
+```
+
+Je n'ai réussi de décompresser cette archive que à partir de la valeur de probabilité `p = 0.04`.
+
+**Image:**
+
+Après avoir éxecuter la commande suivante en variant de manière décroissante à partir de **1** `p` la probabilité d'erreur:
+
+```bash
+cat data/lille.gif | ./encode repeat3 | ./cbssm p | ./decode repeat3 > data/decode.gif 
+```
+
+Je n'ai réussi de lire cette image que à partir de la valeur de probabilité `p = 0.05`.
+
+Ce qui donner le rendu suivant:
+
+![image](./data/decode.gif)
+
+Mais à la probabilité d'erreurs `p = 0.001`, l'image devient complétement lisible.
+
+![image_lisible](./data/decode_lisible.gif)
