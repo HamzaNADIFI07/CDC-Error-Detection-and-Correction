@@ -272,3 +272,126 @@ Ce qui donner le rendu suivant:
 Mais à la probabilité d'erreurs `p = 0.001`, l'image devient complétement lisible.
 
 ![image_lisible](./data/decode_lisible.gif)
+
+## Partie 3 – codages linéaires systématiques
+
+#### Q3.2:
+Après avoir coder la fonction `code_word`et compiler le fichier `lib/linear_coding.c`, avec la commande `make`.
+
+Et en compilant les tests et executant le fichier de test avec la commande `./test_linear_coding `.
+
+On perçoit l'éxecution du test avec succès:
+
+```bash
+ALL TESTS PASSED
+Tests run: 1 (including 12 assertions)
+```
+
+#### Q3.3:
+
+Après avoir lancer le programme `view_linear_coding`, le résultat du codage du mot 0110 avec le codage par parité est `0 1 1 0 0 `.
+
+```bash
+Generator matrix for parity coding [5, 4, 2]
+1 0 0 0 1 
+0 1 0 0 1 
+0 0 1 0 1 
+0 0 0 1 1 
+Word
+0 1 1 0 
+Result of the coding
+0 1 1 0 0 
+```
+
+#### Q3.5:
+
+Après avoir compiler `make` et lancer le programme `view_linear_coding`, le résultat du codage du mot 0110 avec le codage par parité est `0 1 1 0 0 `.
+
+```bash
+--------------------------------------------------
+1 0 0 0 1 0 0 0 1 0 0 0 
+0 1 0 0 0 1 0 0 0 1 0 0 
+0 0 1 0 0 0 1 0 0 0 1 0 
+0 0 0 1 0 0 0 1 0 0 0 1 
+Generator matrix for repeat coding [12, 4, 3]
+1 0 0 0 1 0 0 0 1 0 0 0 
+0 1 0 0 0 1 0 0 0 1 0 0 
+0 0 1 0 0 0 1 0 0 0 1 0 
+0 0 0 1 0 0 0 1 0 0 0 1 
+Word
+0 1 1 0 
+Result of the coding
+0 1 1 0 0 1 1 0 0 1 1 0 
+```
+
+#### Q3.7:
+
+Après avoir réaliser le code de la fonction `transposed_control_matrix`, et lancer les tests correspondants dans `test_linear_coding`, on perçoit l'éxecution du test avec succès:
+
+```bash
+ALL TESTS PASSED
+Tests run: 2 (including 42 assertions)
+```
+#### Q3.8:
+
+Après avoir lancer le programme `./view_linear_coding`, on constate que les transposées des matrices de contrôle sont bien correctes.
+
+```bash
+Transposed control matrix
+1 0 0 0 1 0 0 0 
+0 1 0 0 0 1 0 0 
+0 0 1 0 0 0 1 0 
+0 0 0 1 0 0 0 1 
+1 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 
+0 0 0 1 0 0 0 0 
+0 0 0 0 1 0 0 0 
+0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 
+```
+
+#### Q3.9:
+
+Après avoir coder la fonction `syndrome` qui permet de calculer le **syndrome** d’un mot reçu, on peut constater que la fonction permet bien de calculer le **syndrome** avec succès.
+
+```bash
+Syndrome for 0 1 1 0 0 1 1 0 0 1 1 0 
+0 0 0 0 0 0 0 0 
+Syndrome for 1 1 1 0 0 1 1 0 0 1 1 0 
+1 0 0 0 1 0 0 0 
+```
+#### Q3.10:
+
+Après avoir réaliser la fonction `correct_result` qui corrige le mot fourni en paramètre, et e, compilant et lançant les tests:
+
+```bash
+1 0 1 0 1 0 
+0 1 0 1 0 1 
+ALL TESTS PASSED
+Tests run: 3 (including 54 assertions)
+```
+
+Et après avoir lancer `./view_linear_coding`, on voir que le mot initiale a bien été corriger.
+
+```bash
+Syndrome for 0 1 1 0 0 1 1 0 0 1 1 0 
+0 0 0 0 0 0 0 0 
+Syndrome for 1 1 1 0 0 1 1 0 0 1 1 0 
+1 0 0 0 1 0 0 0 
+Corrected word: 0 1 1 0 0 1 1 0 0 1 1 0 
+```
+ 
+#### 3.11:
+
+Après avoir réaliser la fonction `decode_word` qui décode un mot reçu et renvoie le mot en l’ayant corrigé, et en lançant les tests `./test_linear_coding`, on constate l'execution de tou les tests avec succès.
+```bash
+1 0 1 0 1 0 
+0 1 0 1 0 1 
+1 0 1 0 1 0 
+0 1 0 1 0 1 
+ALL TESTS PASSED
+Tests run: 5 (including 83 assertions)
+```
+

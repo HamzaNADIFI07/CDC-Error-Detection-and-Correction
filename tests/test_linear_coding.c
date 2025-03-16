@@ -211,19 +211,17 @@ static int test_decode_word() {
 }
 
 static int all_tests() {
+  
   mu_run_test(test_code_word_parity);
-/*
+
   mu_run_test(test_transposed_control_matrix);
-*/
-/*
+
   mu_run_test(test_syndrome);
-*/
-/*
+
   mu_run_test(test_encoding);
-*/
-/*
+
   mu_run_test(test_decode_word);
-*/
+
   return mu_tests_success;
 }
  
